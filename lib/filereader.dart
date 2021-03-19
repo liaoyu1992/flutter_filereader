@@ -1,12 +1,12 @@
 import 'package:flutter/services.dart';
 class FileReader {
-  static FileReader _instance;
+  static FileReader? _instance;
 
-  factory FileReader() => _getInstance();
+  factory FileReader() => _getInstance()!;
 
-  static FileReader get instance => _getInstance();
+  static FileReader get instance => _getInstance()!;
 
-  static FileReader _getInstance() {
+  static FileReader? _getInstance() {
     if (_instance == null) {
       _instance = FileReader._();
     }
@@ -35,7 +35,7 @@ class FileReader {
               loadCallback?.call(false);
             }
           }
-          return;
+          return Future.value(false);
         });
       }
     });
