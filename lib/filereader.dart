@@ -22,17 +22,17 @@ class FileReader {
   void engineLoadStatus(Function(bool) loadCallback) async {
     _channel.invokeMethod("isLoad").then((status) {
       if (status == 5) {
-        loadCallback?.call(true);
+        loadCallback.call(true);
       } else if (status == 10) {
-        loadCallback?.call(false);
+        loadCallback.call(false);
       } else if (status == -1) {
         _channel.setMethodCallHandler((call) {
           if (call.method == "onLoad") {
             int status = call.arguments;
             if (status == 5) {
-              loadCallback?.call(true);
+              loadCallback.call(true);
             } else if (status == 10) {
-              loadCallback?.call(false);
+              loadCallback.call(false);
             }
           }
           return Future.value(false);
@@ -47,7 +47,7 @@ class FileReader {
     MethodChannel('wv.io/FileReader' + "_$platformViewId")
         .invokeMethod("openFile", filePath)
         .then((openSuccess) {
-      onOpen?.call(openSuccess);
+      onOpen.call(openSuccess);
     });
   }
 }
